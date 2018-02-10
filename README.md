@@ -48,7 +48,8 @@ request headers
     "users": [
         {
             "name": "홍길동",
-            "id": "11168584298..."
+            "id": "11168584298...",
+            "picture": "https://scontent.xx.fbcdn.net/v/t1.0..."
         }
     ]
 }
