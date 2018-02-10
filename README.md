@@ -6,7 +6,8 @@
 
 ```
 $ npm install
-$ npm install -g nodemon
+$ npm install -g nodemon // dev
+$ npm install -g pm2 // start
 ```
 
 ## Run Development Server
