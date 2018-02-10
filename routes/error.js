@@ -9,7 +9,9 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(err.status || 500).send({ message: err.message });
+    res.status(err.status || 500).send({
+        status: { success: false, message: err.message }
+    });
 });
 
 export default router;

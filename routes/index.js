@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import helloRouter from './hello';
+import signHandler from './sign';
 import errorHandler from './error';
 
 const router = Router();
 
-router.use('/hello', helloRouter);
+router.use('/sign', signHandler);
 router.use(errorHandler);
 
 export default router;

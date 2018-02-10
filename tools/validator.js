@@ -1,7 +1,7 @@
 export const CHECK_LIST = {
-    hello: [
-        { property: 'world', reg: /([A-Z])\w+/, message: 'HELLO_WORLD' }
-    ]
+    auth: [
+        { property: 'accessToken', reg: /.+/, message: '토큰이 왜 없죠?' }
+    ],
 };
 
 export default {
