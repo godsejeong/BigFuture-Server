@@ -16,8 +16,9 @@ router.get('/', async (req, res) => {
         }
         fb.setAccessToken(req.accessToken);
 
+        const me = await fb.api('/me');
         const friends = await fb.api('/me/friends?fields=name,id');
-        console.log(friends);
+        friends.data.unshift(me);
 
         return res.status(200).send({
             status: { success: true, message: '성공!' },

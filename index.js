@@ -28,6 +28,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    if (req.body && req.body.data) {
+        req.body = req.body.data;
+    }
+    next();
+});
+
 app.use(routes);
 
 app.listen(constants.PORT, () => {
