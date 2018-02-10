@@ -1,7 +1,13 @@
 export const CHECK_LIST = {
-    auth: [
-        { property: 'accessToken', reg: /.+/, message: '토큰이 왜 없죠?' }
+    capsule: [
+        { property: 'receiverID', reg: /.+/, message: 'RECEIVER_ID_NOT_EXIST' },
+        { property: 'senderID', reg: /.+/, message: 'SENDER_ID_NOT_EXIST' },
+        { property: 'content', reg: /.+/, message: 'CONTENT_NOT_EXIST' },
+        { property: 'tag', reg: /.+/, message: 'TAG_NOT_EXIST' }
     ],
+    user: [
+        { property: 'graduationDate', reg: /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/, message: 'INVALID_DATE' }
+    ]
 };
 
 export default {

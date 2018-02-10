@@ -7,17 +7,17 @@ import validator from '../tools/validator';
 
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
 
     const fb = new Facebook({ version: 'v2.4' });
 
     try {
-        if (!req.body || !req.body.accessToken) {
+        if (!req.accessToken) {
             throw new Error('ACCESS_TOKEN_NOT_EXIST');
         }
-        fb.setAccessToken(req.body.accessToken);
+        fb.setAccessToken(req.accessToken);
         const fbUserData = await fb.api('/me?fields=education,name,id');
-        const userData = await User.findOne({ userID: fbUserData.id });
+        const userData = await User.findOne({ userID: fbUserData.id }).select('-__v').exec();
 
         if (userData && userData.graduationDate) {
             return res.status(200).send({
@@ -26,12 +26,14 @@ router.post('/', async (req, res) => {
                 exist: true
             });
         } else {
-            await User.create({
-                userID: fbUserData.id,
-                userName: fbUserData.name,
-                schoolID: fbUserData.education[fbUserData.education.length - 1].school.id,
-                schoolName: fbUserData.education[fbUserData.education.length - 1].school.name,
-            });
+            if (!userData) {
+                await User.create({
+                    userID: fbUserData.id,
+                    userName: fbUserData.name,
+                    schoolID: fbUserData.education[fbUserData.education.length - 1].school.id,
+                    schoolName: fbUserData.education[fbUserData.education.length - 1].school.name,
+                });
+            }
             return res.status(200).send({
                 status: { success: true, message: '졸업날짜를 입력해주세요.' },
                 user: userData,

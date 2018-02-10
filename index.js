@@ -21,6 +21,13 @@ app.use(express.static(`${__dirname}/public`));
 app.use(fileUpload());
 app.use(cors());
 
+app.use((req, res, next) => {
+    if (req.headers.authorization) {
+        req.accessToken = req.headers.authorization;
+    }
+    next();
+});
+
 app.use(routes);
 
 app.listen(constants.PORT, () => {
