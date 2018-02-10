@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
         if ((Date.now() - user.graduationDate) < 0) {
             throw new Error('아직 졸업하지 않았자나요!');
         }
-        const capsules = await Capsule.find({ $and: [{ $or: [{ senderID: user.userID }, { receiverID: user.userID }] }, { tag: req.query.tag || /.+/ }] }).select('-__v').exec();
+        const capsules = await Capsule.find({ $and: [{ $or: [{ senderID: user.userID }, { receiverID: user.userID }] }, { tag: req.query.tag || /.+/ }] }).select('-__v').sort({ createdDate: 1 }).exec();
         return res.status(200).send({
             status: { success: true, message: '성공!' },
             capsules: capsules
