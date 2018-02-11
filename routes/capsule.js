@@ -50,6 +50,9 @@ router.get('/', async (req, res) => {
 
         const fbUserData = await fb.api('/me');
         const user = await User.findOne({ userID: fbUserData.id }).select('-__v').exec();
+        if (!user.graduationDate) {
+            throw new Error('졸업날짜를 입력해주세요!');
+        }
         if ((Date.now() - user.graduationDate) < 0) {
             throw new Error('아직 졸업하지 않았자나요!');
         }

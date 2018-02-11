@@ -1,5 +1,7 @@
 # big-future-server
 
+> 2nd Highthon에 참가한 IlIlIl1팀의 출품작인 Big future의 서버입니다.
+
 # `/sign`
 ## GET
 ### request
