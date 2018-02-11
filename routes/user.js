@@ -54,7 +54,7 @@ router.put('/', async (req, res) => {
         }
 
         const fbUserData = await fb.api('/me');
-        console.log(fbUserData);
+        // console.log(fbUserData);
         const updatedUser = await User.findOneAndUpdate({ userID: fbUserData.id }, userData.data, { new: true }).select('-__v').exec();
 
         return res.status(200).send({
